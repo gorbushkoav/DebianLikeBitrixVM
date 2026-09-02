@@ -117,6 +117,9 @@ update-alternatives --set php /usr/bin/php8.2
 update-alternatives --set phar /usr/bin/phar8.2
 update-alternatives --set phar.phar /usr/bin/phar.phar8.2
 
+# fix bugs
+a2dismod --force negotiation filter
+
 
 ln -s $FULL_PATH_MENU_FILE "$DEST_DIR_MENU/menu.sh"
 
@@ -148,6 +151,8 @@ ansible-playbook "$DEST_DIR_MENU/$DIR_NAME_MENU/ansible/playbooks/${BS_ANSIBLE_P
   db_name=${DB_NAME} \
   db_user=${DB_USER} \
   db_password=${DBPASS} \
+  db_character_set_server=${BS_DB_CHARACTER_SET_SERVER} \
+  db_collation_server=${BS_DB_COLLATION} \
 
   site_user_password=${site_user_password} \
 
@@ -179,8 +184,8 @@ ansible-playbook "$DEST_DIR_MENU/$DIR_NAME_MENU/ansible/playbooks/${BS_ANSIBLE_P
 
   bx_cron_agents_path_file_after_document_root=${BS_BX_CRON_AGENTS_PATH_FILE_AFTER_DOCUMENT_ROOT} \
   bx_cron_logs_path_dir=${BS_BX_CRON_LOGS_PATH_DIR} \
-  bx_cron_logs_path_file=${BS_BX_CRON_LOGS_PATH_FILE} \ 
-  
+  bx_cron_logs_path_file=${BS_BX_CRON_LOGS_PATH_FILE} \
+
   push_server_config=${BS_PUSH_SERVER_CONFIG}"
 
 echo -e "\n\n";
